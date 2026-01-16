@@ -1,0 +1,20 @@
+{
+  "Group": "Al3x",
+  "Name": "HytaleAC",
+  "Version": "1.0",
+  "Description": "Private Anticheat Plugin",
+  "Authors": [
+    {
+      "Name": "Al3x"
+    }
+  ],
+  "Website": "https://hytalepvp.club",
+  "ServerVersion": "*",
+  "Dependencies": {
+    "Hytale:AccessControlModule": "*"
+  },
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "Main": "com.al3x.Main",
+  "IncludesAssetPack": true
+}
