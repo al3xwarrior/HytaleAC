@@ -4,6 +4,7 @@ import com.al3x.flags.Flag;
 import com.al3x.utils.DiscordWebhook;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class StaffManager {
         DiscordWebhook.sendFlag(cheater, flag);
         Universe.get().getPlayers().forEach(playerRef -> {
             Player player = cheater.getPlayer();
-            if (isAlertUser(playerRef.getUuid()) && player.hasPermission("hytaleac.alerts")) {
+            if (isAlertUser(playerRef.getUuid()) && playerRef.getComponent(Player.getComponentType()).hasPermission("hytaleac.alerts")) {
                 playerRef.sendMessage(Message.join(
                         Message.raw("[Anticheat] ").color(Color.RED),
                         Message.raw(player.getDisplayName() + " ").color(Color.YELLOW),
@@ -32,8 +33,6 @@ public class StaffManager {
             }
         });
     }
-
-
 
     public void alertViolationsReset() {
         Universe.get().getPlayers().forEach(playerRef -> {

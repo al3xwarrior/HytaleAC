@@ -53,7 +53,7 @@ public class AnticheatPlayer {
             }
         }
 
-        if (flags.size() >= AnticheatConfig.getPunishmentMaxFlags()) {
+        if (!AnticheatConfig.isDebugMode() && flags.size() >= AnticheatConfig.getPunishmentMaxFlags()) {
             DiscordWebhook.sendPunishment(this, "BAN", "Excessive Flags");
 
             String reason = AnticheatConfig.getPunishmentReason();
