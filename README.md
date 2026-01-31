@@ -1,7 +1,7 @@
 # Sentinel
 
 ## Showcase video
-YouTube showcase + explanation: (link coming soon)
+YouTube showcase + explanation: https://www.youtube.com/watch?v=nF527eBHEXo
 
 A Hytale server-side anticheat plugin focused on movement/interaction checks with staff alerts, recent flag logs, and optional Discord webhook notifications and punishments.
 
