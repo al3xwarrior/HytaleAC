@@ -1,7 +1,7 @@
 {
   "Group": "Al3x",
   "Name": "Sentinel",
-  "Version": "1.2.0",
+  "Version": "1.2.1",
   "Description": "A Hytale Anticheat focused on detecting cheats in PvP environments",
   "Authors": [
     {

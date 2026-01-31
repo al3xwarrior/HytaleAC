@@ -8,15 +8,11 @@ import com.al3x.commands.AlertsCommand;
 import com.al3x.commands.AnticheatCommand;
 import com.al3x.commands.LogsCommand;
 import com.al3x.config.AnticheatConfig;
-import com.hypixel.hytale.protocol.packets.connection.Ping;
-import com.hypixel.hytale.protocol.packets.player.ClientMovement;
+import com.al3x.utils.WeaponChargeHelper;
 import com.hypixel.hytale.server.core.HytaleServer;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
-import com.hypixel.hytale.server.core.io.adapter.PacketAdapters;
-import com.hypixel.hytale.server.core.io.adapter.PlayerPacketFilter;
 import com.hypixel.hytale.server.core.modules.accesscontrol.AccessControlModule;
 import com.hypixel.hytale.server.core.modules.accesscontrol.provider.HytaleBanProvider;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
@@ -24,9 +20,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
@@ -38,6 +32,8 @@ public class Main extends JavaPlugin {
     private FlyCheck flyCheck;
     private SpeedCheck speedCheck;
     private InfStaminaCheck infStaminaCheck;
+
+    private WeaponChargeHelper weaponChargeHelper;
 
     private final ConcurrentHashMap<UUID, AnticheatPlayer> anticheatPlayers;
     private final StaffManager staffManager;
@@ -77,12 +73,15 @@ public class Main extends JavaPlugin {
             speedCheck.removePlayer(uuid);
             infStaminaCheck.removePlayer(uuid);
             staffManager.removeAlertUser(uuid);
+            weaponChargeHelper.removePlayer(uuid);
         });
+
+        weaponChargeHelper = new WeaponChargeHelper();
 
         // Register Checks
         timerCheck = new TimerCheck(this);
         flyCheck = new FlyCheck(this);
-        speedCheck = new SpeedCheck(this);
+        speedCheck = new SpeedCheck(this, weaponChargeHelper);
         infStaminaCheck = new InfStaminaCheck(this);
         timerCheck.register();
         flyCheck.register();
